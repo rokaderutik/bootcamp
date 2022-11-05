@@ -20,7 +20,9 @@ void main(){
 	}
 	// accessing by 1 for loop
 	
+	printf("\n");
 	for(int i=0; i<6; i++){
 		printf("%p\n",arr[i]);
+		printf("%d\n",*(*arr+i));
 	}
 }

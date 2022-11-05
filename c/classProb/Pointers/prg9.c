@@ -24,7 +24,7 @@ void main(){
 
 	fun();
 
-	printf("%d\n",*ptr);
 	printf("%p\n",ptr);
+	printf("%d\n",*ptr);
 
 }
