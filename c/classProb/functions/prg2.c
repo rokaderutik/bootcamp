@@ -10,7 +10,7 @@ int * fun(int x,int y){
 	int val;
 	val=x+y;
 	
-	return &val;
+	return &val;	//returning address of local variable
 }
 void main(){
 	int *ptr=fun(10,20);
