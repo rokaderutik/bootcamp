@@ -1,6 +1,6 @@
-//prg3
+//prg4
 //stack using array of structure
-//means we are storing pointer of structure object in array
+//means we are storing object of structure in array
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,49 +16,44 @@ typedef struct company{
 	float rev;
 }cmp;
 
-cmp* push(cmp* stack[]){
+int push(cmp stack[]){
 	if(top == size-1){
 		//stack is full so no object creation
 		printf("stack overflow\n");
 		return -1;
-	}else{
-		//create object
-		cmp *obj = (cmp *)malloc(sizeof(cmp));
-		
+	}else{	
 		//fill data in structure object
 		getchar();
 		printf("Enter company name\n");
-		gets(obj->cName);
+		gets(stack[++top].cName);
 		printf("Enter no of employee's\n");
-		scanf("%d", &obj->noEmp);
+		scanf("%d", &stack[top].noEmp);
 		printf("Enter revenue in crores\n");
-		scanf("%f", &obj->rev);
-
-		//pass object to array or stack
-		stack[++top] = obj;
+		scanf("%f", &stack[top].rev);
 
 		return 0;
 	}
 }
 
-cmp* pop(cmp* *stack){
+//function returns object which is popped so using that we can print values
+cmp pop(cmp *stack){
 	if(top == -1){
 		printf("stack underflow\n");
 		flag = 0;
-		return -1;
+		//return -1;
 	}else{
-		cmp *ret = stack[top];
+		cmp ret = stack[top];
 		top--;
 		flag = 1;
 		return ret;
 	}
 }
 
-cmp* peak(cmp* stack[]){
+cmp peak(cmp stack[]){
 	if(top == -1){
 		printf("stack underflow\n");
 		flag = 0;
-		return -1;
+		//return -1;
 	}else{
 		flag = 1;
 		return stack[top];
@@ -71,7 +66,13 @@ void main(){
 	printf("Enter stack size\n");
 	scanf("%d", &size);
 
-	cmp* stack[size];
+	cmp stack[size];
+
+	//create objects
+	for(int i = 0; i < size; i++){
+		cmp obj;
+		stack[i] = obj;
+	}
 
 	do{
 		printf("1.push()\n");
@@ -89,16 +90,16 @@ void main(){
 				break;
 			case 2:
 				{
-					cmp* ptr = pop(stack);
+					cmp ptr = pop(stack);
 					if(flag == 1)
-						printf("|%s - %d - %.2f| popped\n", ptr->cName, ptr->noEmp, ptr->rev);
+						printf("|%s - %d - %.2f| popped\n", ptr.cName, ptr.noEmp, ptr.rev);
 				}
 				break;
 			case 3:
 				{
-					cmp* ptr = peak(stack);
+					cmp ptr = peak(stack);
 					if(flag == 1)
-						printf("|%s - %d - %.2f|\n", ptr->cName, ptr->noEmp, ptr->rev);
+						printf("|%s - %d - %.2f|\n", ptr.cName, ptr.noEmp, ptr.rev);
 				}
 				break;
 			default :
